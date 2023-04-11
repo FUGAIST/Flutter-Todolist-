@@ -1,0 +1,30 @@
+void main() {
+  
+  List<int> numbers = [];
+
+  
+  numbers.add(10);
+  numbers.add(20);
+  numbers.add(30);
+
+  
+  print(numbers[0]); // Output: 10
+
+  
+  numbers[1] = 25;
+
+  
+  numbers.remove(30);
+
+  
+  print(numbers.contains(20)); // Output: true
+
+  
+  print(numbers.length); // Output: 2
+
+  
+  for (var number in numbers) {
+    print(number);
+  }
+  
+}
