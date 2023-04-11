@@ -1,7 +1,8 @@
-void main() {
+void main() { 
   
   Map<String, int> ages = {};
-
+  
+  //isimler
   
   ages['Furkan'] = 30;
   ages['Asaf'] = 35;
