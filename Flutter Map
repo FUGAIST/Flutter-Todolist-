@@ -1,0 +1,30 @@
+void main() {
+  
+  Map<String, int> ages = {};
+
+  
+  ages['Furkan'] = 30;
+  ages['Asaf'] = 35;
+  ages['Enes'] = 40;
+
+  
+  print(ages['Furkan']); // Output: 30
+
+  
+  ages['Asaf'] = 36;
+
+  
+  ages.remove('Enes');
+
+  
+  print(ages.containsKey('Asaf'));
+
+  
+  print(ages.length);
+
+
+  ages.forEach((key, value) {
+    print('$key: $value');
+  });
+  
+}
