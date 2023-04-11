@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+
+class Todo {
+  String title;
+  bool completed;
+
+  Todo({
+    required this.title,
+    this.completed = false,
+  });
+}
+
+class TodoListApp extends StatefulWidget {
+  @override
+  _TodoListAppState createState() => _TodoListAppState();
+}
+
+class _TodoListAppState extends State<TodoListApp> {
+  List<Todo> todos = [];
+
+  void _addTodo(String title) {
+    setState(() {
+      todos.add(Todo(title: title));
+    });
+  }
+
+  void _toggleTodoCompletion(int index) {
+    setState(() {
+      todos[index].completed = !todos[index].completed;
+    });
+  }
+
+  void _deleteTodo(int index) {
+    setState(() {
+      todos.removeAt(index);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'DartNet TodoList',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Todo List'),
+        ),
+        body: ListView.builder(
+          itemCount: todos.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(
+                todos[index].title,
+                style: TextStyle(
+                  decoration: todos[index].completed
+                      ? TextDecoration.lineThrough
+                      : null,
+                ),
+              ),
+              leading: Checkbox(
+                value: todos[index].completed,
+                onChanged: (_) => _toggleTodoCompletion(index),
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () => _deleteTodo(index),
+              ),
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            final result = await showDialog(
+              context: context,
+              builder: (context) => AddTodoDialog(),
+            );
+            if (result != null) {
+              _addTodo(result);
+            }
+          },
+          child: Icon(Icons.add),
+        ),
+      ),
+    );
+  }
+}
+
+class AddTodoDialog extends StatefulWidget {
+  @override
+  _AddTodoDialogState createState() => _AddTodoDialogState();
+}
+
+class _AddTodoDialogState extends State<AddTodoDialog> {
+  String _todoTitle = '';
+
+  void _addTodo() {
+    Navigator.pop(context, _todoTitle);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Add Todo'),
+      content: TextField(
+        onChanged: (value) => setState(() => _todoTitle = value),
+        decoration: InputDecoration(labelText: 'Todo Title'),
+      ),
+      actions: [
+        FlatButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        RaisedButton(
+          onPressed: _todoTitle.isNotEmpty ? _addTodo : null,
+          child: Text('Add'),
+        ),
+      ],
+    );
+  }
+}
+
+void main() {
+  runApp(TodoListApp());
+}
