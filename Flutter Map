@@ -8,7 +8,7 @@ void main() {
   ages['Enes'] = 40;
 
   
-  print(ages['Furkan']); // Output: 30
+  print(ages['Furkan']);
 
   
   ages['Asaf'] = 36;
