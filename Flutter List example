@@ -8,7 +8,7 @@ void main() {
   numbers.add(30);
 
   
-  print(numbers[0]); // Output: 10
+  print(numbers[0]); 
 
   
   numbers[1] = 25;
@@ -17,10 +17,10 @@ void main() {
   numbers.remove(30);
 
   
-  print(numbers.contains(20)); // Output: true
+  print(numbers.contains(20)); 
 
   
-  print(numbers.length); // Output: 2
+  print(numbers.length); 
 
   
   for (var number in numbers) {
